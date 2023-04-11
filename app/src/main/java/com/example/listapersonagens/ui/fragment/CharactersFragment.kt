@@ -9,9 +9,10 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.listapersonagens.R
 import com.example.listapersonagens.databinding.FragmentCharactersBinding
-import com.example.listapersonagens.model.domain.CharacterType.DISNEY
-import com.example.listapersonagens.model.domain.CharacterType.RICKY_AND_MORTY
-import com.example.listapersonagens.model.mapper.toDomain
+import com.example.listapersonagens.model.domain.DISNEY
+import com.example.listapersonagens.model.domain.RICKY_AND_MORTY
+import com.example.listapersonagens.model.mapper.DisneyCharacterTransformer
+import com.example.listapersonagens.model.mapper.RickyAndMortyCharacterTransformer
 import com.example.listapersonagens.network.service.DisneyService
 import com.example.listapersonagens.network.service.RickyAndMortyService
 import com.example.listapersonagens.ui.utils.adapter.CharactersAdapter
@@ -82,7 +83,11 @@ class CharactersFragment : Fragment() {
                                 .into(ivCharactersTypeImage)
                             
                             val disneyCharacters = disneyService.getCharacters()
-                            charactersAdapter.submitList(disneyCharacters.data.toDomain())
+                            val transformer = DisneyCharacterTransformer()
+
+                            charactersAdapter.submitList(
+                                transformer.transform(disneyCharacters.data)
+                            )
                             pbLoadingCharacters.gone()
                         }
                     }
@@ -100,8 +105,10 @@ class CharactersFragment : Fragment() {
                                 .into(ivCharactersTypeImage)
                             
                             val rickyAndMortyCharacters = rickyAndMortyService.getCharacters()
+                            val transformer = RickyAndMortyCharacterTransformer()
+
                             charactersAdapter.submitList(
-                                rickyAndMortyCharacters.results.toDomain()
+                                transformer.transform(rickyAndMortyCharacters.results)
                             )
                             pbLoadingCharacters.gone()
                         }
