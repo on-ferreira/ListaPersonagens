@@ -1,18 +1,20 @@
 package com.example.listapersonagens.network.authentication
 
-import com.example.listapersonagens.model.domain.InMemoryUserRepository
-import com.example.listapersonagens.model.domain.User
-import com.example.listapersonagens.model.domain.UserRepository
+import com.example.listapersonagens.model.User
+import com.example.listapersonagens.network.LoginService
 
-//object FirebaseAuthenticator {
-//
-//    private val registeredUsers = listOf(
-//        User("teste1@gmail.com", "123"),
-//        User("teste2@gmail.com", "456")
-//    )
-//
-//    fun login(email: String, password: String): Boolean =
-//        registeredUsers.any { it.email == email && it.password == password }
-//
-//}
-//
+val registeredUsers = listOf(
+    User("teste@teste.com", "123"),
+    User("teste2@teste2.com", "456")
+)
+
+object FirebaseAuthenticator {
+
+    fun provideLoginService(): LoginService {
+        return object : LoginService {
+            override fun login(email: String, password: String): Boolean {
+                return registeredUsers.any { it.email == email && it.password == password }
+            }
+        }
+    }
+}

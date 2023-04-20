@@ -1,3 +1,3 @@
-package com.example.listapersonagens.model.domain
+package com.example.listapersonagens.model
 
 data class User(val email: String, val password: String)

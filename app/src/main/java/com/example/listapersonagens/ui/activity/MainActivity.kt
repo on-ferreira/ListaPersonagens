@@ -3,9 +3,6 @@ package com.example.listapersonagens.ui.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.listapersonagens.databinding.ActivityMainBinding
-import com.example.listapersonagens.model.domain.InMemoryUserRepository
-import com.example.listapersonagens.model.domain.User
-import com.example.listapersonagens.network.authentication.BackendAuthenticator
 
 class MainActivity : AppCompatActivity() {
     
