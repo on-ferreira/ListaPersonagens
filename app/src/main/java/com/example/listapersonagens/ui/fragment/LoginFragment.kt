@@ -38,7 +38,7 @@ class LoginFragment : Fragment() {
     private fun setupView() {
         with(binding) {
             btnLogin.setOnClickListener {
-                val isLoggedIn = FirebaseAuthenticator.login(tietEmail.text.toString(), tietPassword.text.toString())
+                val isLoggedIn = FirebaseAuthenticator.provideLoginService().login(tietEmail.text.toString(), tietPassword.text.toString())
                 if (isLoggedIn)
                     findNavController().navigate(R.id.action_loginFragment_to_charactersFragment)
                 else
